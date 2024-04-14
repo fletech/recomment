@@ -1,58 +1,85 @@
-import { useEffect, useState } from "react";
 import FeedbackItem from "./FeedbackItem";
 import { Spinner } from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
+import { TFeedbackItem } from "../../lib/types";
 
-export default function FeedbackList() {
-  const [feedbackItems, setFeedbackItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+type TFeedbackListProps = {
+  isLoading: boolean;
+  feedbackItems: TFeedbackItem[];
+  error: string;
+};
 
-  useEffect(() => {
-    setIsLoading(true);
+export default function FeedbackList({
+  isLoading,
+  error,
+  feedbackItems,
+}: TFeedbackListProps) {
+  // const [feedbackItems, setFeedbackItems] = useState<TFeedbackItem[]>([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState("");
 
-    const fetchFeedbackItems = async () => {
-      try {
-        const response = await fetch(
-          "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks"
-        );
+  // const handleAddToList = (text:string) => {
+  //   const companyName = text
+  //     .split(" ")
+  //     .find((word: string) => word.includes("#"))!
+  //     .substring(1);
+  //   const newItem: TFeedbackItem = {
+  //     id: useId(),
+  //     upvoteCount: 0,
+  //     badgeLetter: companyName.substring(0, 1).toUpperCase(),
+  //     company: companyName,
+  //     text: text,
+  //     daysAgo: 0,
+  //   };
 
-        if (!response.ok) {
-          setError("Failed to fetch feedback items");
-          setIsLoading(false);
-          return;
-        }
+  //   setFeedbackItems([newItem, ...feedbackItems]);
+  // };
 
-        const data = await response.json();
-        setFeedbackItems(data.feedbacks);
-      } catch (error) {
-        setError("Something went wrong. Please try again later.");
-        setIsLoading(false);
-        return;
-      }
-      setIsLoading(false);
-    };
+  // useEffect(() => {
+  //   setIsLoading(true);
 
-    fetchFeedbackItems();
+  //   const fetchFeedbackItems = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks"
+  //       );
 
-    // fetch(
-    //   "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks"
-    // )
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("Failed to fetch feedback items");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     setIsLoading(false);
-    //     setFeedbackItems(data.feedbacks);
-    //   })
-    //   .catch(() => {
-    //     setError("Something went wrong. Please try again later.");
-    //     setIsLoading(false);
-    //   });
-  }, []);
+  //       if (!response.ok) {
+  //         setError("Failed to fetch feedback items");
+  //         setIsLoading(false);
+  //         return;
+  //       }
+
+  //       const data = await response.json();
+  //       setFeedbackItems(data.feedbacks);
+  //     } catch (error) {
+  //       setError("Something went wrong. Please try again later.");
+  //       setIsLoading(false);
+  //       return;
+  //     }
+  //     setIsLoading(false);
+  //   };
+
+  //   fetchFeedbackItems();
+
+  //   // fetch(
+  //   //   "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks"
+  //   // )
+  //   //   .then((response) => {
+  //   //     if (!response.ok) {
+  //   //       throw new Error("Failed to fetch feedback items");
+  //   //     }
+  //   //     return response.json();
+  //   //   })
+  //   //   .then((data) => {
+  //   //     setIsLoading(false);
+  //   //     setFeedbackItems(data.feedbacks);
+  //   //   })
+  //   //   .catch(() => {
+  //   //     setError("Something went wrong. Please try again later.");
+  //   //     setIsLoading(false);
+  //   //   });
+  // }, []);
 
   return (
     <ol className="feedback-list">
