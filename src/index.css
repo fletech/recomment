@@ -505,8 +505,11 @@ form button span::selection {
 }
 
 /* HASHTAG */
+
 .hashtags li button {
   align-self: flex-start;
+  display: flex;
+  align-items: center;
   font-size: 13px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.6);
@@ -515,6 +518,11 @@ form button span::selection {
   border-radius: 500px;
   cursor: pointer;
   transition: all 0.2s;
+}
+.hashtags li.clear-filter button {
+  color: tomato;
+  background-color: rgba(32, 176, 255, 0.06);
+  font-weight: 700;
 }
 
 .hashtags li button:hover,
